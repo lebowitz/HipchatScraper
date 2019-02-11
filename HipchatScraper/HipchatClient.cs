@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace HipchatScraper
 {
-
-
-    public class HipchatClient
+        public class HipchatClient
     {
         private HttpClient _httpClient;
 
@@ -22,17 +20,18 @@ namespace HipchatScraper
 
         public Task<HttpResponseMessage> GetAsync(string url)
         {
-            Console.WriteLine(url);
+            Trace.WriteLine(url);
             var result = _httpClient.GetAsync(url);
             result.Wait();
             var content = result.Result.Content.ReadAsStringAsync();
             content.Wait();
-            Trace.WriteLine(content);
+
+            Debug.WriteLine(content.Result);
 
             Thread.Sleep(TimeSpan.FromSeconds(3));
             if ((int) result.Result.StatusCode == 429)
             {
-                Console.WriteLine("429 - Backing off...");
+                Trace.WriteLine("429 - Backing off...");
                 Thread.Sleep(TimeSpan.FromMinutes(1));
             }
 

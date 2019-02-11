@@ -2,11 +2,10 @@
 
 IF NOT EXISTS (   SELECT *
                   FROM   sys.databases
-                  WHERE  name = 'Hipchat')
+                  WHERE  name = 'HipChat')
     CREATE DATABASE Hipchat;
-GO
 
-USE Hipchat;
+USE HipChat;
 
 IF NOT EXISTS (   SELECT *
                   FROM   sys.objects
