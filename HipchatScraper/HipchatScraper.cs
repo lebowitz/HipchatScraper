@@ -291,7 +291,7 @@ namespace HipchatScraper
 
                         if (item.Value<string>("type") == "message")
                         {
-                            Message msg = ConvertToMessage(item);
+                            Message msg = ConvertToMessage(item, roomId);
                             if (ctx.Messages.Any(rm => rm.id == msg.id))
                             {
                                 hitExistingMessage = true;
@@ -312,7 +312,7 @@ namespace HipchatScraper
             }
         }
 
-        private static Message ConvertToMessage(JToken item)
+        private static Message ConvertToMessage(JToken item, long? roomId = null)
         {
             var msg = new Message()
             {
@@ -324,6 +324,10 @@ namespace HipchatScraper
             if (item["room_id"] != null)
             {
                 msg.room_id = item.Value<long>("room_id");
+            }
+            else if (roomId.HasValue)
+            {
+                msg.room_id = roomId;
             }
 
             JObject file = (JObject)item["file"];
@@ -344,7 +348,7 @@ namespace HipchatScraper
                 }
             }
 
-            /* Older objects in Hipchat's API used a string here*/
+            /* Older objects in HipChat's API used a string here*/
             if (item["from"] is JValue)
             {
                 string from = item.Value<string>("from");

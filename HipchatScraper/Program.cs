@@ -1,13 +1,7 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 // ReSharper disable CommentTypo
 // ReSharper disable StringLiteralTypo
 
